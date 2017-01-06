@@ -9,11 +9,8 @@
 # Once the dyno has is 'up' you can open your browser and navigate
 # this dyno's directory structure to download the nginx binary.
 
-NGINX_VERSION=${NGINX_VERSION-1.5.7}
-PCRE_VERSION=${PCRE_VERSION-8.21}
-HEADERS_MORE_VERSION=${HEADERS_MORE_VERSION-0.23}
 
-headers_more_nginx_module_url=https://github.com/agentzh/headers-more-nginx-module/archive/v${HEADERS_MORE_VERSION}.tar.gz
+echo "BUILD NGINX";
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
 
@@ -26,7 +23,6 @@ echo "Temp dir: $temp_dir"
 
 
 # Main dependencies
-git clone https://github.com/konstruxi/skema --depth=1;
 git clone https://github.com/nginx/nginx --depth=1;
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
