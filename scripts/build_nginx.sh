@@ -50,7 +50,7 @@ git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=
 
 # Compile nginx (change path to your app)
 
-if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
+if [ -z "$APP_PATH" ]; then APP_PATH="."; fi
 
 cd nginx;
 
