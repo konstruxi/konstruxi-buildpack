@@ -13,8 +13,6 @@ NGINX_VERSION=${NGINX_VERSION-1.5.7}
 PCRE_VERSION=${PCRE_VERSION-8.21}
 HEADERS_MORE_VERSION=${HEADERS_MORE_VERSION-0.23}
 
-nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
-pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 headers_more_nginx_module_url=https://github.com/agentzh/headers-more-nginx-module/archive/v${HEADERS_MORE_VERSION}.tar.gz
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
@@ -26,23 +24,25 @@ python -m SimpleHTTPServer $PORT &
 cd $temp_dir
 echo "Temp dir: $temp_dir"
 
-echo "Downloading $nginx_tarball_url"
-curl -L $nginx_tarball_url | tar xzv
 
-echo "Downloading $pcre_tarball_url"
-(cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj )
+# Main dependencies
+git clone https://github.com/konstruxi/skema --depth=1;
+git clone https://github.com/nginx/nginx --depth=1;
+git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
+git clone https://github.com/konstruxi/ngx_postgres --depth=1;
+git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
+git clone https://github.com/openresty/nginx-eval-module.git --depth=1;
 
-echo "Downloading $headers_more_nginx_module_url"
-(cd nginx-${NGINX_VERSION} && curl -L $headers_more_nginx_module_url | tar xvz )
+# Optional dependencies
+git clone https://github.com/openresty/echo-nginx-module.git --depth=1;
+git clone https://github.com/simpl/ngx_devel_kit.git --depth=1;
+git clone https://github.com/openresty/set-misc-nginx-module.git --depth=1;
+git clone https://github.com/vkholodkov/nginx-upload-module.git --depth=1;
+git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=1;
 
-(
-	cd nginx-${NGINX_VERSION}
-	./configure \
-		--with-pcre=pcre-${PCRE_VERSION} \
-		--prefix=/tmp/nginx \
-		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/headers-more-nginx-module-${HEADERS_MORE_VERSION}
-	make install
-)
+# Compile nginx (change path to your app)
+env APP_PATH=./skema ./skema/compile-nginx.sh
+
 
 while true
 do
