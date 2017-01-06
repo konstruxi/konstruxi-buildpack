@@ -20,6 +20,7 @@ done
 mkdir -p logs
 touch logs/access.log logs/error.log
 mkdir temp
+mkdir temp/run
 echo 'buildpack=nginx at=logs-initialized'
 
 #Start log redirection.
