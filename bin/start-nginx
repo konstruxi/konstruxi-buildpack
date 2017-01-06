@@ -5,7 +5,7 @@ rm -f $psmgr
 mkfifo $psmgr
 
 #Evaluate config to get $PORT
-erb config/nginx.conf.erb > config/nginx.conf
+erb conf/heroku/nginx.conf.erb > conf/heroku/nginx.conf
 
 n=1
 while getopts :f option ${@:1:2}
@@ -53,13 +53,13 @@ echo 'buildpack=nginx at=logs-initialized'
 #fi
 
 #Start NGINX
-(
 	#We expect nginx to run in foreground.
 	#We also expect a socket to be at /tmp/nginx.socket.
 	echo 'buildpack=nginx at=nginx-start'
-	bin/nginx -p ./conf -c config/nginx.conf
+	touch ./logs/access.log
+	touch ./logs/error.log
+	bin/nginx -p ./conf -c ./heroku/nginx.conf
 	echo 'nginx' >$psmgr
-) &
 
 #This read will block the process waiting on a msg to be put into the fifo.
 #If any of the processes defined above should exit,
