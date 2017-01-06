@@ -17,15 +17,15 @@ do
 done
 
 #Initialize log directory.
-mkdir -p logs/nginx
-touch logs/nginx/access.log logs/nginx/error.log
+mkdir -p logs
+touch logs/access.log logs/error.log
 mkdir temp
 echo 'buildpack=nginx at=logs-initialized'
 
 #Start log redirection.
 (
 	#Redirect NGINX logs to stdout.
-	tail -qF -n 0 logs/nginx/*.log
+	tail -qF -n 0 logs/*.log
 	echo 'logs' >$psmgr
 ) &
 
