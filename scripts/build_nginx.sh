@@ -31,7 +31,7 @@ echo "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
 
 echo "Downloading $pcre_tarball_url"
-(curl -L $pcre_tarball_url | tar xvj -C ./nginx)
+(curl -L $pcre_tarball_url | tar xvj -C ./nginxy --strip-components=1)
 
 # Main dependencies
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
