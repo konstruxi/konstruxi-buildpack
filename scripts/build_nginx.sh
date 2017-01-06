@@ -22,7 +22,7 @@ cd $temp_dir
 echo "Temp dir: $temp_dir"
 
 PCRE_VERSION=${PCRE_VERSION-8.21}
-pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
+pcre_tarball_url=http://ncu.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 
 echo "Downloading $pcre_tarball_url"
 (curl -L $pcre_tarball_url | tar xvj )
