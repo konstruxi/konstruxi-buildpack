@@ -60,6 +60,7 @@ echo 'buildpack=nginx at=logs-initialized'
 	echo 'buildpack=nginx at=nginx-start'
 	touch ./logs/access.log
 	touch ./logs/error.log
+	ulimit -c unlimited 
 	bin/nginx -p ./conf -c ./heroku.conf
 	echo 'nginx' >$psmgr
 
