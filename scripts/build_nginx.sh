@@ -28,11 +28,11 @@ pcre_tarball_url=http://ncu.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 
 echo "Downloading $nginx_tarball_url"
-curl -L $nginx_tarball_url | tar xzv
+mkdir nginx;
+curl -L $nginx_tarball_url | tar xzv -C ./nginx --strip-components=1
 
 echo "Downloading $pcre_tarball_url"
-mkdir nginx;
-(curl -L $pcre_tarball_url | tar xvj -C ./nginx --strip-components=1)
+(curl -L $pcre_tarball_url | tar xvj)
 
 # Main dependencies
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
@@ -48,7 +48,6 @@ git clone https://github.com/vkholodkov/nginx-upload-module.git --depth=1;
 git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=1;
 
 # Compile nginx (change path to your app)
-env APP_PATH=.;
 
 if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 
