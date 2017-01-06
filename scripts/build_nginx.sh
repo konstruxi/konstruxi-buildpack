@@ -39,6 +39,7 @@ git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
 git clone https://github.com/openresty/nginx-eval-module.git --depth=1;
+git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
 
 # Optional dependencies
 git clone https://github.com/openresty/echo-nginx-module.git --depth=1;
