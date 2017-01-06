@@ -22,7 +22,7 @@ cd $temp_dir
 echo "Temp dir: $temp_dir"
 
 PCRE_VERSION=${PCRE_VERSION-8.21}
-NGINX_VERSION=${NGINX_VERSION-1.5.7}
+NGINX_VERSION=${NGINX_VERSION-1.10.2}
 
 pcre_tarball_url=http://ncu.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
