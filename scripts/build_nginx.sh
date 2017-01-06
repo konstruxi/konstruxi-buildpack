@@ -55,7 +55,7 @@ if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 cd nginx;
 
 env CFLAGS="-Wno-error" ./configure \
-  --with-cc-opt="-std=c99" \
+  --with-cc-opt="-std=c99 -lm" \
   --prefix=$APP_PATH/conf \
   --with-http_ssl_module \
   --with-pcre=../pcre-${PCRE_VERSION} \
