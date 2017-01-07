@@ -61,7 +61,7 @@ echo 'buildpack=nginx at=logs-initialized'
 	touch ./logs/access.log
 	touch ./logs/error.log
 	ulimit -S -c unlimited 
-	bin/nginx -p ./conf -c ./heroku.conf
+	ASAN_OPTIONS=symbolize=1  bin/nginx -p ./conf -c ./heroku.conf
 	echo 'nginx' >$psmgr
 
 #This read will block the process waiting on a msg to be put into the fifo.
