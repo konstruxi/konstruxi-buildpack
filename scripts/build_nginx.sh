@@ -60,7 +60,7 @@ if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 cd nginx;
 
 env CFLAGS="-Wno-error" ./configure \
-  --with-cc-opt="-g -O1 -std=c99" \
+  --with-cc-opt="-O1 -std=c99" \
   --with-ld-opt="-lm" \
   --prefix=$APP_PATH/conf \
   --with-http_ssl_module \
@@ -77,6 +77,7 @@ env CFLAGS="-Wno-error" ./configure \
   --http-scgi-temp-path=../temp/scgi_temp \
   --http-log-path=../logs/access.log \
   --error-log-path=../logs/error.log \
+  --with-debug \
   --add-module=../ngx_devel_kit \
   --add-module=../set-misc-nginx-module \
   --add-module=../form-input-nginx-module \
