@@ -39,6 +39,7 @@ echo "Downloading $pcre_tarball_url"
 (curl -L $pcre_tarball_url | tar xvj)
 
 # Main dependencies
+git clone https://github.com/konstruxi/skema --depth=1;
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
