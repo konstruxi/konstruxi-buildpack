@@ -77,7 +77,6 @@ env CFLAGS="-Wno-error" ./configure \
   --http-scgi-temp-path=../temp/scgi_temp \
   --http-log-path=../logs/access.log \
   --error-log-path=../logs/error.log \
-  --with-debug \
   --add-module=../ngx_devel_kit \
   --add-module=../set-misc-nginx-module \
   --add-module=../form-input-nginx-module \
