@@ -10,6 +10,10 @@
 # this dyno's directory structure to download the nginx binary.
 
 
+# sudo apt-get install curl
+# sudo apt-get install libssl-dev
+# sudo apt-get install libpq-dev
+
 echo "BUILD NGINX";
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
@@ -50,12 +54,12 @@ git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=
 
 # Compile nginx (change path to your app)
 
-if [ -z "$APP_PATH" ]; then APP_PATH="."; fi
+if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 
 cd nginx;
 
 env CFLAGS="-Wno-error" ./configure \
-  --with-cc-opt="-std=c99" \
+  --with-cc-opt="-g -O1 -std=c99" \
   --with-ld-opt="-lm" \
   --prefix=$APP_PATH/conf \
   --with-http_ssl_module \
