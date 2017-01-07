@@ -60,8 +60,8 @@ if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 cd nginx;
 
 env CFLAGS="-Wno-error" ./configure \
-  --with-cc-opt="-g -fsanitize=address -O1 -std=c99" \
-  --with-ld-opt="-g -fsanitize=address -lm" \
+  --with-cc-opt="-O1 -std=c99" \
+  --with-ld-opt="-lm" \
   --prefix=$APP_PATH/conf \
   --with-http_ssl_module \
   --with-pcre=../pcre-${PCRE_VERSION} \
