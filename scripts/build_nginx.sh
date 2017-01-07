@@ -59,8 +59,6 @@ if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 
 cd nginx;
 
-apt-get install clang;
-
 env CFLAGS="-Wno-error" ./configure \
   --with-cc-opt="-g -fsanitize=address -O1 -std=c99" \
   --with-ld-opt="-g -fsanitize=address -lm" \
