@@ -26,7 +26,7 @@ cd $temp_dir
 echo "Temp dir: $temp_dir"
 
 PCRE_VERSION=${PCRE_VERSION-8.21}
-NGINX_VERSION=${NGINX_VERSION-1.10.2}
+NGINX_VERSION=${NGINX_VERSION-1.11.2}
 
 pcre_tarball_url=http://ncu.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
@@ -43,10 +43,10 @@ git clone https://github.com/konstruxi/skema --depth=1;
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
-git clone https://github.com/openresty/nginx-eval-module.git --depth=1;
-git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
+git clone https://github.com/konstruxi/nginx-eval-module.git --depth=1;
 
 # Optional dependencies
+git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
 git clone https://github.com/openresty/echo-nginx-module.git --depth=1;
 git clone https://github.com/simpl/ngx_devel_kit.git --depth=1;
 git clone https://github.com/openresty/set-misc-nginx-module.git --depth=1;
