@@ -48,8 +48,9 @@ git clone https://github.com/konstruxi/nginx-eval-module.git --depth=1;
 # Optional dependencies
 git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
 git clone https://github.com/openresty/echo-nginx-module.git --depth=1;
-git clone https://github.com/simpl/ngx_devel_kit.git --depth=1;
+git clone https://github.com/openresty/headers-more-nginx-module.git --depth=1;
 git clone https://github.com/openresty/set-misc-nginx-module.git --depth=1;
+git clone https://github.com/simpl/ngx_devel_kit.git --depth=1;
 git clone https://github.com/vkholodkov/nginx-upload-module.git --depth=1;
 git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=1;
 
@@ -78,6 +79,7 @@ env CFLAGS="-Wno-error" ./configure \
   --http-log-path=../logs/access.log \
   --error-log-path=../logs/error.log \
   --with-debug \
+  --add-module=../headers-more-nginx-module \
   --add-module=../ngx_devel_kit \
   --add-module=../set-misc-nginx-module \
   --add-module=../form-input-nginx-module \
