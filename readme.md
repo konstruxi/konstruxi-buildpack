@@ -1,11 +1,37 @@
-Compile konstruxi nginx stack and its dependencies:
+## Konstruxi reciepe
 
-mkdir konstruxi;
+A reciepe to create a new konstruxi app and its dependencies from sources. It also contains heroku reciepe.
 
-git clone https://github.com/konstruxi/konstruxi-buildpack --depth=1;
 
-APP_PATH='myapp' ./konstruxi-buildpack/scripts/build_nginx.sh;
+## Requirements:
 
-cd myapp;
+LIBSSL: `sudo apt-get install libssl-dev`
+LIBPQ:  `sudo apt-get install libpq-dev`
 
-PORT=80 DATABASE_URL=psql://user:password@localhost/database ./bin/start-nginx-app;
+You will need *superuser* for postgre to activate necessary extensions (currently only ossn-uuid)
+
+
+
+## Installation
+    mkdir konstruxi;
+
+    # Clone reciepe
+    git clone https://github.com/konstruxi/konstruxi-buildpack --depth=1;
+
+    # Clone & Compile nginx
+    APP_PATH='myapp' ./konstruxi-buildpack/scripts/build_nginx.sh;
+
+
+    cd myapp;
+    
+    cd model;
+
+    # Run PSQL installation script
+    ./rebuild.sh;
+    cd ..;
+
+    # Compile config with your PG connection & HTTP port settings
+    PORT=80 DATABASE_URL=psql://user:password@localhost/database erb conf/heroku/nginx.conf.erb > conf/heroku.conf;
+
+    # Run nginx with the config
+    bin/nginx -p ./conf -c ./heroku.conf;
