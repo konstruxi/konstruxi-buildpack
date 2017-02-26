@@ -1,5 +1,3 @@
-
-# sudo apt-get install curl
 # sudo apt-get install libssl-dev
 # sudo apt-get install libpq-dev
 
@@ -29,7 +27,7 @@ git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
 git clone https://github.com/konstruxi/nginx-eval-module.git --depth=1;
-git clone https://github.com/konstruxi/writer.git beauty --depth=1;
+git clone https://github.com/konstruxi/writer.git -b master beauty --depth=1;
 
 ### Optional dependencies
 git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
