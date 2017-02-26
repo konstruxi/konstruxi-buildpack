@@ -1,14 +1,3 @@
-#!/bin/bash
-# Build NGINX and modules on Heroku.
-# This program is designed to run in a web dyno provided by Heroku.
-# We would like to build an NGINX binary for the builpack on the
-# exact machine in which the binary will run.
-# Our motivation for running in a web dyno is that we need a way to
-# download the binary once it is built so we can vendor it in the buildpack.
-#
-# Once the dyno has is 'up' you can open your browser and navigate
-# this dyno's directory structure to download the nginx binary.
-
 
 # sudo apt-get install curl
 # sudo apt-get install libssl-dev
@@ -16,14 +5,7 @@
 
 echo "BUILD NGINX";
 
-temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
 
-echo "Serving files from /tmp on $PORT"
-cd /tmp
-python -m SimpleHTTPServer $PORT &
-
-cd $temp_dir
-echo "Temp dir: $temp_dir"
 
 PCRE_VERSION=${PCRE_VERSION-8.21}
 NGINX_VERSION=${NGINX_VERSION-1.11.2}
@@ -38,18 +20,18 @@ curl -L $nginx_tarball_url | tar xzv -C ./nginx --strip-components=1
 echo "Downloading $pcre_tarball_url"
 (curl -L $pcre_tarball_url | tar xvj)
 
-# Compile nginx (change path to your app)
+### Compile nginx (change path to your app)
+if [ -z "$APP_PATH" ]; then APP_PATH="skema"; fi
 
-if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
-# Main dependencies
-git clone https://github.com/konstruxi/skema --depth=1;
+### Main dependencies
+git clone https://github.com/konstruxi/skema $APP_PATH --depth=1;
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
 git clone https://github.com/konstruxi/nginx-eval-module.git --depth=1;
-git clone https://github.com/konstruxi/writer.git $APP_PATH/../beauty --depth=1;
+git clone https://github.com/konstruxi/writer.git beauty --depth=1;
 
-# Optional dependencies
+### Optional dependencies
 git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
 git clone https://github.com/openresty/echo-nginx-module.git --depth=1;
 git clone https://github.com/openresty/headers-more-nginx-module.git --depth=1;
@@ -64,7 +46,7 @@ cd nginx;
 env CFLAGS="-Wno-error" ./configure \
   --with-cc-opt="-O1 -std=c99" \
   --with-ld-opt="-lm" \
-  --prefix=$APP_PATH/conf \
+  --prefix=../$APP_PATH/conf \
   --with-http_ssl_module \
   --with-pcre=../pcre-${PCRE_VERSION} \
   --with-ipv6 \
@@ -90,6 +72,7 @@ env CFLAGS="-Wno-error" ./configure \
   --add-module=../nginx-eval-module \
   --add-module=../ngx_coolkit;
 make install;
+cd ..;
 rm -rf $APP_PATH/conf/fastcgi.conf;
 rm -rf $APP_PATH/conf/fastcgi.conf.default;
 rm -rf $APP_PATH/conf/fastcgi_params;
@@ -103,8 +86,3 @@ rm -rf $APP_PATH/conf/uwsgi_params;
 rm -rf $APP_PATH/conf/uwsgi_params.default;
 rm -rf $APP_PATH/conf/html;
 
-while true
-do
-	sleep 1
-	echo "."
-done
