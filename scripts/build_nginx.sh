@@ -38,12 +38,16 @@ curl -L $nginx_tarball_url | tar xzv -C ./nginx --strip-components=1
 echo "Downloading $pcre_tarball_url"
 (curl -L $pcre_tarball_url | tar xvj)
 
+# Compile nginx (change path to your app)
+
+if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 # Main dependencies
 git clone https://github.com/konstruxi/skema --depth=1;
 git clone https://github.com/konstruxi/form-input-nginx-module --depth=1;
 git clone https://github.com/konstruxi/ngx_postgres --depth=1;
 git clone https://github.com/konstruxi/mustache-nginx-module --depth=1;
 git clone https://github.com/konstruxi/nginx-eval-module.git --depth=1;
+git clone https://github.com/konstruxi/writer.git $APP_PATH/../beauty --depth=1;
 
 # Optional dependencies
 git clone https://github.com/FRiCKLE/ngx_coolkit.git --depth=1;
@@ -54,9 +58,6 @@ git clone https://github.com/simpl/ngx_devel_kit.git --depth=1;
 git clone https://github.com/vkholodkov/nginx-upload-module.git --depth=1;
 git clone https://github.com/masterzen/nginx-upload-progress-module.git --depth=1;
 
-# Compile nginx (change path to your app)
-
-if [ -z "$APP_PATH" ]; then APP_PATH="../skema"; fi
 
 cd nginx;
 
